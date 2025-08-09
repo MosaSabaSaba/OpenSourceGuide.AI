@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ title }} </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/{{style}}.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="search-container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-12">
+                    <div class="d-flex flex-column flex-md-row align-items-center">
+                        <input type="text" id="repoInput" class="form-control search-input flex-grow-1" 
+                               placeholder="Paste GitHub repository URL here (e.g., https://github.com/user/repo)">
+                        <button id="searchBtn" class="btn search-btn">
+                            <span class="btn-text">Analyze</span>
+                            <div class="loading">
+                                <div class="spinner-border spinner-border-sm" role="status"></div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-12">
+                    <h2 id="repoTitle" class="repo-title"></h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cards-container">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="card info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon">📌</div>
+                                <h5 class="card-title">Where can I start?</h5>
+                                <div id="startContent" class="card-content">
+                                    <p>Discover beginner-friendly issues and good first contributions. We'll analyze the repository to find tasks marked as "good first issue", "help wanted", or similar beginner-friendly labels.</p>
+                                    <div class="text-muted small">Enter a repository URL above to get started</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="card info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon">🛠️</div>
+                                <h5 class="card-title">What needs improving?</h5>
+                                <div id="improvingContent" class="card-content">
+                                    <p>Identify areas that need attention - missing documentation, outdated README files, stale branches, or code that could benefit from refactoring.</p>
+                                    <div class="text-muted small">Analysis will appear here after searching</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="card info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon">📃</div>
+                                <h5 class="card-title">What rules should I follow?</h5>
+                                <div id="rulesContent" class="card-content">
+                                    <p>Learn about the project's contribution guidelines, code of conduct, coding standards, and development workflow from CONTRIBUTING.md and other policy files.</p>
+                                    <div class="text-muted small">Guidelines will be summarized here</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="card info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="card-icon">🔎</div>
+                                <h5 class="card-title">What's this repo about?</h5>
+                                <div id="aboutContent" class="card-content">
+                                    <p>Get an AI-generated summary of the project's purpose, main features, technology stack, and overall architecture to understand what you'll be working with.</p>
+                                    <div class="text-muted small">Project summary will appear here</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/{{script}}.js"></script>
+</body>
+</html>
