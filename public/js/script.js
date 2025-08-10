@@ -82,29 +82,43 @@ async function analyzeRepository(url) {
     showLoading();
     
     try {
-        // Update repo title
-        const repoName = extractRepoName(url);
-        repoTitle.textContent = `Analysis for ${repoName}`;
-        
-        // Simulate API calls with delays
-        const delays = [1000, 1500, 2000, 2500];
-        const types = ['start', 'improving', 'rules', 'about'];
-        
-        types.forEach((type, index) => {
-            setTimeout(() => {
-                updateContent(type, mockResponses[type]);
-            }, delays[index]);
-        });
-        
+      const response = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ repoUrl: url })
+      });
+  
+      // First check if response is OK
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Analysis failed');
+      }
+  
+      // Then try to parse as JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`Expected JSON but got: ${text.substring(0, 100)}...`);
+      }
+  
+      const data = await response.json();
+      
+      // Update UI
+      updateContent('start', data.analysis.whereToStart);
+      updateContent('improving', data.analysis.whatNeedsImproving);
+      updateContent('rules', data.analysis.contributionRules);
+      updateContent('about', data.analysis.projectOverview);
+      
     } catch (error) {
-        console.error('Error analyzing repository:', error);
-        Object.keys(contentElements).forEach(type => {
-            updateContent(type, '<p class="text-danger">Error analyzing repository. Please try again.</p>');
-        });
+      console.error('Analysis error:', error);
+      const errorHTML = `<div class="alert alert-danger">${error.message}</div>`;
+      Object.keys(contentElements).forEach(type => {
+        updateContent(type, errorHTML);
+      });
     } finally {
-        setTimeout(hideLoading, 3000);
+      hideLoading();
     }
-}
+  }
 
 function handleSearch() {
     const url = repoInput.value.trim();
