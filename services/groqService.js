@@ -6,7 +6,7 @@ class GroqService {
         this.baseURL = 'https://api.groq.com/openai/v1';
         this.model = 'llama3-70b-8192';
         // Hardcoded API key 
-        this.apiKey = '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';
+        // this.apiKey = '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';
         
         if (!process.env.GROQ_API_KEY) {
             console.warn('GROQ_API_KEY not found in environment variables');
