@@ -14,10 +14,6 @@ console.log('Environment Variables Loaded:', {
     NODE_ENV: process.env.NODE_ENV
 });
 
-// ES Modules equivalent for __dirname
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-
 const app = express();
 
 const publicDirectory = path.join(__dirname, './public');

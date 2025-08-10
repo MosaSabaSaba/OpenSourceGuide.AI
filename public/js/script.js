@@ -118,7 +118,7 @@ async function analyzeRepository(url) {
     } finally {
       hideLoading();
     }
-  }
+}
 
 function handleSearch() {
     const url = repoInput.value.trim();

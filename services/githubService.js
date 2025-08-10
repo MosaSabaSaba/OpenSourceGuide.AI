@@ -3,15 +3,23 @@ import fetch from 'node-fetch';
 class GitHubService {
     constructor() {
         this.baseURL = 'https://api.github.com';
-        this.headers = {
+        
+        const headers = {
             'Accept': 'application/vnd.github.v3+json',
             'User-Agent': 'OpenSourceGuide-AI/1.0'
         };
-        
-        // Add authentication if GitHub token is provided
-        if (process.env.GITHUB_TOKEN) {
-            this.headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+
+        this.githubtoken = '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';
+    
+        if (this.githubtoken) {
+            const token = this.githubtoken.trim();
+            if (!/^gh[pousr]_[A-Za-z0-9_]{36,255}$/.test(token)) {
+                throw new Error('Invalid GitHub token format');
+            }
+            headers.Authorization = `token ${token}`;
         }
+    
+        this.headers = Object.freeze(headers);
     }
     
     /**
